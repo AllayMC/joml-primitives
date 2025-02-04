@@ -376,7 +376,7 @@ public interface AABBic {
      *          the plane
      * @return <code>true</code> iff the plane intersects this AABB; <code>false</code> otherwise
      */
-    boolean intersectsPlane(Planef plane);
+    boolean intersectsPlane(Planefc plane);
 
     /**
      * Test whether <code>this</code> and <code>other</code> intersect.
@@ -423,7 +423,7 @@ public interface AABBic {
      *          the sphere
      * @return <code>true</code> iff this AABB and the sphere intersect; <code>false</code> otherwise
      */
-    boolean intersectsSphere(Spheref sphere);
+    boolean intersectsSphere(Spherefc sphere);
 
     /**
      * Test whether the given ray with the origin <code>(originX, originY, originZ)</code> and direction <code>(dirX, dirY, dirZ)</code>
@@ -461,7 +461,7 @@ public interface AABBic {
      *          the ray
      * @return <code>true</code> if this AABB and the ray intersect; <code>false</code> otherwise
      */
-    boolean intersectsRay(Rayf ray);
+    boolean intersectsRay(Rayfc ray);
     /**
      * Determine whether the given ray with the origin <code>(originX, originY, originZ)</code> and direction <code>(dirX, dirY, dirZ)</code>
      * intersects this AABB, and return the values of the parameter <i>t</i> in the ray equation
@@ -507,7 +507,7 @@ public interface AABBic {
      *              iff the ray intersects this AABB
      * @return <code>true</code> if the given ray intersects this AABB; <code>false</code> otherwise
      */
-    boolean intersectsRay(Rayf ray, Vector2f result);
+    boolean intersectsRay(Rayfc ray, Vector2f result);
 
     /**
      * Determine whether the undirected line segment with the end points <code>(p0X, p0Y, p0Z)</code> and <code>(p1X, p1Y, p1Z)</code>
@@ -560,7 +560,7 @@ public interface AABBic {
      *         {@link Intersectionf#ONE_INTERSECTION} if one of the end points of the line segment lies inside of this AABB; or
      *         {@link Intersectionf#TWO_INTERSECTION} if the line segment intersects two sides of this AABB or lies on an edge or a side of this AABB
      */
-    int intersectLineSegment(LineSegmentf lineSegment, Vector2f result);
+    int intersectLineSegment(LineSegmentfc lineSegment, Vector2f result);
 
     /**
      * Apply the given {@link Matrix4fc#isAffine() affine} transformation to this

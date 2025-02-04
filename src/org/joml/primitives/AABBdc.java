@@ -354,7 +354,7 @@ public interface AABBdc {
      *          the plane
      * @return <code>true</code> iff the plane intersects this AABB; <code>false</code> otherwise
      */
-    boolean intersectsPlane(Planed plane);
+    boolean intersectsPlane(Planedc plane);
 
 
     /**
@@ -393,7 +393,7 @@ public interface AABBdc {
      *          the sphere
      * @return <code>true</code> iff this AABB and the sphere intersect; <code>false</code> otherwise
      */
-    boolean intersectsSphere(Spheref sphere);
+    boolean intersectsSphere(Spherefc sphere);
 
 
     /**
@@ -433,7 +433,7 @@ public interface AABBdc {
      *          the ray
      * @return <code>true</code> if this AABB and the ray intersect; <code>false</code> otherwise
      */
-    boolean intersectsRay(Rayd ray);
+    boolean intersectsRay(Raydc ray);
     /**
      * Determine whether the given ray with the origin <code>(originX, originY, originZ)</code> and direction <code>(dirX, dirY, dirZ)</code>
      * intersects this AABB, and return the values of the parameter <i>t</i> in the ray equation
@@ -480,7 +480,7 @@ public interface AABBdc {
      *              iff the ray intersects this AABB
      * @return <code>true</code> if the given ray intersects this AABB; <code>false</code> otherwise
      */
-    boolean intersectsRay(Rayd ray, Vector2d result);
+    boolean intersectsRay(Raydc ray, Vector2d result);
 
     /**
      * Determine whether the undirected line segment with the end points <code>(p0X, p0Y, p0Z)</code> and <code>(p1X, p1Y, p1Z)</code>
@@ -533,7 +533,7 @@ public interface AABBdc {
      *         {@link Intersectiond#ONE_INTERSECTION} if one of the end points of the line segment lies inside of this AABB; or
      *         {@link Intersectiond#TWO_INTERSECTION} if the line segment intersects two sides of this AABB or lies on an edge or a side of this AABB
      */
-    int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result);
+    int intersectsLineSegment(LineSegmentfc lineSegment, Vector2d result);
 
     /**
      * Apply the given {@link Matrix4dc#isAffine() affine} transformation to this {@link AABBd}

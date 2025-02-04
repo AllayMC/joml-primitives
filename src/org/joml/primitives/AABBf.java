@@ -556,7 +556,7 @@ public class AABBf implements Externalizable, AABBfc {
         return Intersectionf.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
 
-    public boolean intersectsPlane(Planef plane) {
+    public boolean intersectsPlane(Planefc plane) {
         return Intersectionf.testAabPlane(this, plane);
     }
 
@@ -577,7 +577,7 @@ public class AABBf implements Externalizable, AABBfc {
         return Intersectionf.testRayAab(originX, originY, originZ, dirX, dirY, dirZ, minX, minY, minZ, maxX, maxY, maxZ);
     }
 
-    public boolean intersectsRay(Rayf ray) {
+    public boolean intersectsRay(Rayfc ray) {
         return Intersectionf.testRayAab(ray, this);
     }
 
@@ -585,7 +585,7 @@ public class AABBf implements Externalizable, AABBfc {
         return Intersectionf.intersectRayAab(originX, originY, originZ, dirX, dirY, dirZ, minX, minY, minZ, maxX, maxY, maxZ, result);
     }
 
-    public boolean intersectsRay(Rayf ray, Vector2f result) {
+    public boolean intersectsRay(Rayfc ray, Vector2f result) {
         return Intersectionf.intersectRayAab(ray, this, result);
     }
 
@@ -593,7 +593,7 @@ public class AABBf implements Externalizable, AABBfc {
         return Intersectionf.intersectLineSegmentAab(p0X, p0Y, p0Z, p1X, p1Y, p1Z, minX, minY, minZ, maxX, maxY, maxZ, result);
     }
 
-    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2f result) {
+    public int intersectsLineSegment(LineSegmentfc lineSegment, Vector2f result) {
         return Intersectionf.intersectLineSegmentAab(lineSegment, this, result);
     }
 

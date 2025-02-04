@@ -537,8 +537,8 @@ public class Intersectiond {
      *          the plane
      * @return <code>true</code> iff the axis-aligned box intersects the plane; <code>false</code> otherwise
      */
-    public static boolean testAabPlane(AABBd aabb, Planed plane) {
-        return testAabPlane(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, plane.a, plane.b, plane.c, plane.d);
+    public static boolean testAabPlane(AABBdc aabb, Planedc plane) {
+        return testAabPlane(aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ(), plane.a(), plane.b(), plane.c(), plane.d());
     }
 
     /**
@@ -631,8 +631,8 @@ public class Intersectiond {
      *              the second AABB
      * @return <code>true</code> iff both axis-aligned boxes intersect; <code>false</code> otherwise
      */
-    public static boolean testAabAab(AABBd aabb1, AABBd aabb2) {
-        return testAabAab(aabb1.minX, aabb1.minY, aabb1.minZ, aabb1.maxX, aabb1.maxY, aabb1.maxZ, aabb2.minX, aabb2.minY, aabb2.minZ, aabb2.maxX, aabb2.maxY, aabb2.maxZ);
+    public static boolean testAabAab(AABBdc aabb1, AABBdc aabb2) {
+        return testAabAab(aabb1.minX(), aabb1.minY(), aabb1.minZ(), aabb1.maxX(), aabb1.maxY(), aabb1.maxZ(), aabb2.minX(), aabb2.minY(), aabb2.minZ(), aabb2.maxX(), aabb2.maxY(), aabb2.maxZ());
     }
 
     /**
@@ -1208,8 +1208,8 @@ public class Intersectiond {
      * @return the value of the parameter <i>t</i> in the ray equation <i>p(t) = origin + t * dir</i> of the intersection point, if the ray
      *         intersects the plane; <code>-1.0</code> otherwise
      */
-    public static double intersectRayPlane(Rayd ray, Planed plane, double epsilon) {
-        return intersectRayPlane(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, plane.a, plane.b, plane.c, plane.d, epsilon);
+    public static double intersectRayPlane(Raydc ray, Planedc plane, double epsilon) {
+        return intersectRayPlane(ray.oX(), ray.oY(), ray.oZ(), ray.dX(), ray.dY(), ray.dZ(), plane.a(), plane.b(), plane.c(), plane.d(), epsilon);
     }
 
     /**
@@ -1346,8 +1346,8 @@ public class Intersectiond {
      *          the sphere
      * @return <code>true</code> iff the axis-aligned box intersects the sphere; <code>false</code> otherwise
      */
-    public static boolean testAabSphere(AABBd aabb, Spheref sphere) {
-        return testAabSphere(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, sphere.x, sphere.y, sphere.z, sphere.r*sphere.r);
+    public static boolean testAabSphere(AABBdc aabb, Spherefc sphere) {
+        return testAabSphere(aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ(), sphere.x(), sphere.y(), sphere.z(), sphere.r()*sphere.r());
     }
 
     /**
@@ -2236,8 +2236,8 @@ public class Intersectiond {
      *              <i>p(t) = origin + t * dir</i> for both points (near, far) of intersections with the sphere
      * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
      */
-    public static boolean intersectRaySphere(Rayd ray, Spheref sphere, Vector2d result) {
-        return intersectRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, sphere.x, sphere.y, sphere.z, sphere.r*sphere.r, result);
+    public static boolean intersectRaySphere(Raydc ray, Spherefc sphere, Vector2d result) {
+        return intersectRaySphere(ray.oX(), ray.oY(), ray.oZ(), ray.dX(), ray.dY(), ray.dZ(), sphere.x(), sphere.y(), sphere.z(), sphere.r()*sphere.r(), result);
     }
 
     /**
@@ -2320,8 +2320,8 @@ public class Intersectiond {
      *              the sphere
      * @return <code>true</code> if the ray intersects the sphere; <code>false</code> otherwise
      */
-    public static boolean testRaySphere(Rayd ray, Spheref sphere) {
-        return testRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, sphere.x, sphere.y, sphere.z, sphere.r*sphere.r);
+    public static boolean testRaySphere(Raydc ray, Spherefc sphere) {
+        return testRaySphere(ray.oX(), ray.oY(), ray.oZ(), ray.dX(), ray.dY(), ray.dZ(), sphere.x(), sphere.y(), sphere.z(), sphere.r()*sphere.r());
     }
 
     /**
@@ -2540,8 +2540,8 @@ public class Intersectiond {
      *              iff the ray intersects the axis-aligned box
      * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
      */
-    public static boolean intersectRayAab(Rayd ray, AABBd aabb, Vector2d result) {
-        return intersectRayAab(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, result);
+    public static boolean intersectRayAab(Raydc ray, AABBdc aabb, Vector2d result) {
+        return intersectRayAab(ray.oX(), ray.oY(), ray.oZ(), ray.dX(), ray.dY(), ray.dZ(), aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ(), result);
     }
 
     /**
@@ -2699,8 +2699,8 @@ public class Intersectiond {
      *         {@link #TWO_INTERSECTION} if the line segment intersects two sides of the axis-aligned box
      *         or lies on an edge or a side of the box
      */
-    public static int intersectLineSegmentAab(LineSegmentf lineSegment, AABBd aabb, Vector2d result) {
-        return intersectLineSegmentAab(lineSegment.aX, lineSegment.aY, lineSegment.aZ, lineSegment.bX, lineSegment.bY, lineSegment.bZ, aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, result);
+    public static int intersectLineSegmentAab(LineSegmentfc lineSegment, AABBdc aabb, Vector2d result) {
+        return intersectLineSegmentAab(lineSegment.aX(), lineSegment.aY(), lineSegment.aZ(), lineSegment.bX(), lineSegment.bY(), lineSegment.bZ(), aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ(), result);
     }
 
     /**
@@ -2823,8 +2823,8 @@ public class Intersectiond {
      *              the AABB
      * @return <code>true</code> if the given ray intersects the axis-aligned box; <code>false</code> otherwise
      */
-    public static boolean testRayAab(Rayd ray, AABBd aabb) {
-        return testRayAab(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ);
+    public static boolean testRayAab(Raydc ray, AABBdc aabb) {
+        return testRayAab(ray.oX(), ray.oY(), ray.oZ(), ray.dX(), ray.dY(), ray.dZ(), aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ());
     }
 
     /**
