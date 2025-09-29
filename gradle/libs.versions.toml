@@ -1,0 +1,9 @@
+[libraries]
+gwt = { module = "com.google.gwt:gwt-user", version = "2.5.0" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version = "5.13.4" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version = "1.13.4" }
+joml = { module = "org.joml:joml", version = "1.10.0" }
+
+[plugins]
+publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
+

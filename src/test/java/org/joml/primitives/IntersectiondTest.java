@@ -25,17 +25,19 @@ package org.joml.primitives;
 
 import org.joml.Vector2d;
 import org.joml.Vector3d;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the {@link Intersectiond} class.
  *
  * @author Dmitrii Ivaniusin
  */
-public class IntersectiondTest extends TestCase {
+public class IntersectiondTest {
 
-    public static void testFindClosestPointOnRectangle() {
+    @Test
+    public void testFindClosestPointOnRectangle() {
         final double EPSILON = 1E-4d;
         Vector3d a = new Vector3d(0, 0, 0);
         Vector3d b = new Vector3d(0, 1d, 0);
@@ -56,8 +58,9 @@ public class IntersectiondTest extends TestCase {
         Vector3d v5 = Intersectiond.findClosestPointOnRectangle(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z, p5.x, p5.y, p5.z, new Vector3d());
         TestUtil.assertVector3dEquals(new Vector3d(0.5d, 1d, 0), v5, EPSILON);
     }
-    
-    public static void testLineSegmentAar() {
+
+    @Test
+    public void testLineSegmentAar() {
         Vector2d p = new Vector2d();
         assertEquals(Intersectiond.ONE_INTERSECTION, Intersectiond.intersectLineSegmentAar(0, 0, 1, 0, 0.5, -1, 1.5, 1, p));
         TestUtil.assertVector2dEquals(new Vector2d(0.5, 0.5), p, 1E-6f);
@@ -97,7 +100,8 @@ public class IntersectiondTest extends TestCase {
         TestUtil.assertVector2dEquals(new Vector2d(0, 0.5), p, 1E-6f);
     }
 
-    public static void testLineSegmentAab() {
+    @Test
+    public void testLineSegmentAab() {
         Vector2d p = new Vector2d();
         assertEquals(Intersectiond.ONE_INTERSECTION, Intersectiond.intersectLineSegmentAab(0, 0, 0, 0, 0, 1, -0.5, -1, 1, 0.5, 1, 2, p));
         TestUtil.assertVector2dEquals(new Vector2d(1, 1), p, 1E-6f);
@@ -106,5 +110,4 @@ public class IntersectiondTest extends TestCase {
         assertEquals(Intersectiond.TWO_INTERSECTION, Intersectiond.intersectLineSegmentAab(0, 0, -1, 0, 0, 0, 0, -1, -1, 1, 1, 0, p));
         TestUtil.assertVector2dEquals(new Vector2d(0, 1), p, 1E-6f);
     }
-
 }

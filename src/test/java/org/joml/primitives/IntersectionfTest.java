@@ -23,23 +23,22 @@
  */
 package org.joml.primitives;
 
-import junit.framework.TestCase;
-
-import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import org.joml.*;
 import org.joml.Math;
-import org.joml.Matrix3f;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Intersectionf} class.
- * 
+ *
  * @author Kai Burjack
  * @author Dmitrii Ivaniusin
  */
-public class IntersectionfTest extends TestCase {
+public class IntersectionfTest {
 
-    public static void testIntersectRayTriangleFrontPX() {
+    @Test
+    public void testIntersectRayTriangleFrontPX() {
         Vector3f origin = new Vector3f();
         Vector3f dir = new Vector3f(1, 0, 0);
         Vector3f v0 = new Vector3f(1, -1, -1);
@@ -49,7 +48,8 @@ public class IntersectionfTest extends TestCase {
         assertEquals(1.0f, t, 0.0f);
     }
 
-    public static void testIntersectRaySphere() {
+    @Test
+    public void testIntersectRaySphere() {
         Vector3f origin = new Vector3f();
         Vector3f dir = new Vector3f(1, 0, 0);
         Vector3f center = new Vector3f(5, 0, 0);
@@ -61,7 +61,8 @@ public class IntersectionfTest extends TestCase {
         assertEquals(6.0f, result.y, 1E-6f);
     }
 
-    public static void testIntersectRayPlane() {
+    @Test
+    public void testIntersectRayPlane() {
         Vector3f origin = new Vector3f();
         Vector3f dir = new Vector3f(1, 1, 1);
         Vector3f point = new Vector3f(2, 2, 2);
@@ -75,23 +76,26 @@ public class IntersectionfTest extends TestCase {
         assertEquals(-1.0f, t, 1E-6f);
     }
 
-    public static void testNotIntersectRayPlane() {
+    @Test
+    public void testNotIntersectRayPlane() {
         Vector3f origin = new Vector3f();
         Vector3f dir = new Vector3f(-1, -1, -1);
         Vector3f point = new Vector3f(2, 2, 2);
         Vector3f normal = new Vector3f(-1, -1, -1);
         float t = Intersectionf.intersectRayPlane(origin, dir, point, normal, 0.0f);
-        assertTrue(t == -1.0f);
+        assertEquals(-1.0f, t);
     }
 
-    public static void testAabPlane() {
+    @Test
+    public void testAabPlane() {
         assertTrue(Intersectionf.testAabPlane(-1, -1, -1, 1, 1, 1, 1, 1, 1, 3.0f));
         assertFalse(Intersectionf.testAabPlane(-1, -1, -1, 1, 1, 1, 1, 1, 1, 3.1f));
         assertTrue(Intersectionf.testAabPlane(-1, -1, -1, 1, 1, 1, 1, 1, 1, -3.0f));
         assertFalse(Intersectionf.testAabPlane(-1, -1, -1, 1, 1, 1, 1, 1, 1, -3.1f));
     }
 
-    public static void testSphereSphere() {
+    @Test
+    public void testSphereSphere() {
         assertTrue(Intersectionf.testSphereSphere(0, 0, 0, 1, 0.5f, 0, 0, 1));
         Vector4f res = new Vector4f();
         assertTrue(Intersectionf.intersectSphereSphere(0, 0, 0, 1, 0.5f, 0, 0, 1, res));
@@ -106,25 +110,29 @@ public class IntersectionfTest extends TestCase {
         assertEquals(expectedRadius, res.w, 1E-6f);
     }
 
-    public static void testAabSphere() {
+    @Test
+    public void testAabSphere() {
         assertTrue(Intersectionf.testAabSphere(-1, -1, -1, 1, 1, 1, 2, 0, 0, 1.0f));
     }
 
-    public static void testRayTriangleFront() {
+    @Test
+    public void testRayTriangleFront() {
         assertTrue(Intersectionf.testRayTriangleFront(0, 0, 0, 1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testRayTriangleFront(0, 0, 0, 1, 0, 0, 1, -1, 1, 1, -1, -1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testRayTriangleFront(0, 0, 0, -1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testRayTriangleFront(0, 0, 0, -1, 0, 0, 1, -1, 1, 1, -1, -1, 1, 1, 0, 1E-6f));
     }
 
-    public static void testRayTriangle() {
+    @Test
+    public void testRayTriangle() {
         assertTrue(Intersectionf.testRayTriangle(0, 0, 0, 1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertTrue(Intersectionf.testRayTriangle(0, 0, 0, 1, 0, 0, 1, -1, 1, 1, -1, -1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testRayTriangle(0, 0, 0, -1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testRayTriangle(0, 0, 0, -1, 0, 0, 1, -1, 1, 1, -1, -1, 1, 1, 0, 1E-6f));
     }
 
-    public static void testLineSegmentSphere() {
+    @Test
+    public void testLineSegmentSphere() {
         assertTrue(Intersectionf.testLineSegmentSphere(-1, 0, 0, 1, 0, 0, 0, 0, 0, 1));
         assertTrue(Intersectionf.testLineSegmentSphere(-1, 1, 0, 1, 1, 0, 0, 0, 0, 1));
         assertFalse(Intersectionf.testLineSegmentSphere(-1, 1.01f, 0, 1, 1, 0, 0, 0, 0, 1));
@@ -138,7 +146,8 @@ public class IntersectionfTest extends TestCase {
         assertFalse(Intersectionf.testLineSegmentSphere(-1, 0, 0, 1, 0, 0, 4.01f, 0, 0, 3 * 3));
     }
 
-    public static void testLineSegmentTriangle() {
+    @Test
+    public void testLineSegmentTriangle() {
         assertTrue(Intersectionf.testLineSegmentTriangle(-1, 0, 0, 1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testLineSegmentTriangle(-1, 0, 0, -5, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
         assertFalse(Intersectionf.testLineSegmentTriangle(-5, 0, 0, -1, 0, 0, 1, -1, -1, 1, -1, 1, 1, 1, 0, 1E-6f));
@@ -150,7 +159,8 @@ public class IntersectionfTest extends TestCase {
         assertTrue(Intersectionf.testLineSegmentTriangle(1, 0, 0, -1, 0, 0, 1, -1, 1, 1, -1, -1, 1, 1, 0, 1E-6f));
     }
 
-    public static void testRayAar() {
+    @Test
+    public void testRayAar() {
         Vector2f p = new Vector2f();
         assertEquals(Intersectionf.AAR_SIDE_MINX, Intersectionf.intersectRayAar(-3, 0, 1, 0, -1, -1, 1, 1, p));
         TestUtil.assertVector2fEquals(new Vector2f(-1, 0), new Vector2f(-3 + p.x * 1, 0 + p.x * 0), 1E-6f);
@@ -170,7 +180,8 @@ public class IntersectionfTest extends TestCase {
         TestUtil.assertVector2fEquals(new Vector2f(1, 0), new Vector2f(0 + p.x * 1, 0 + p.x * 0), 1E-6f);
     }
 
-    public static void testRayLineSegment() {
+    @Test
+    public void testRayLineSegment() {
         assertEquals(1.0f, Intersectionf.intersectRayLineSegment(0, 0, 1, 0, 1, -1, 1, 1), 1E-6f);
         assertEquals(1.0f, Intersectionf.intersectRayLineSegment(0, 0, 1, 0, 1, 1, 1, -1), 1E-6f);
         assertEquals(1.0f, Intersectionf.intersectRayLineSegment(0, 1, 1, 0, 1, 1, 1, -1), 1E-6f);
@@ -182,9 +193,10 @@ public class IntersectionfTest extends TestCase {
         assertEquals(-1.0f, Intersectionf.intersectRayLineSegment(0, 0, 1, 0, 1, 2, 1, 1), 1E-6f);
     }
 
-    public static void testPolygonRay() {
+    @Test
+    public void testPolygonRay() {
         Vector2f p = new Vector2f();
-        float[] verticesXY = { 0, 0, 1, 0, 1, 1, 0, 1 };
+        float[] verticesXY = {0, 0, 1, 0, 1, 1, 0, 1};
         assertEquals(3, Intersectionf.intersectPolygonRay(verticesXY, -1, 0.5f, 1, 0, p));
         TestUtil.assertVector2fEquals(new Vector2f(0, 0.5f), p, 1E-6f);
         assertEquals(0, Intersectionf.intersectPolygonRay(verticesXY, 0.1f, -0.5f, 0, 1, p));
@@ -199,7 +211,8 @@ public class IntersectionfTest extends TestCase {
         TestUtil.assertVector2fEquals(new Vector2f(0.1f, 0), p, 1E-6f);
     }
 
-    public static void testLineSegmentAar() {
+    @Test
+    public void testLineSegmentAar() {
         Vector2f p = new Vector2f();
         assertEquals(Intersectionf.ONE_INTERSECTION, Intersectionf.intersectLineSegmentAar(0, 0, 1, 0, 0.5f, -1, 1.5f, 1, p));
         TestUtil.assertVector2fEquals(new Vector2f(0.5f, 0.5f), p, 1E-6f);
@@ -239,7 +252,8 @@ public class IntersectionfTest extends TestCase {
         TestUtil.assertVector2fEquals(new Vector2f(0, 0.5f), p, 1E-6f);
     }
 
-    public static void testLineSegmentAab() {
+    @Test
+    public void testLineSegmentAab() {
         Vector2f p = new Vector2f();
         assertEquals(Intersectionf.ONE_INTERSECTION, Intersectionf.intersectLineSegmentAab(0, 0, 0, 0, 0, 1, -0.5f, -1, 1, 0.5f, 1, 2, p));
         TestUtil.assertVector2fEquals(new Vector2f(1, 1), p, 1E-6f);
@@ -249,11 +263,12 @@ public class IntersectionfTest extends TestCase {
         TestUtil.assertVector2fEquals(new Vector2f(0, 1), p, 1E-6f);
     }
 
-    public static void testObObTipToTip() {
+    @Test
+    public void testObObTipToTip() {
         Vector3f c0 = new Vector3f();
         float EPSILON = 1E-4f;
         /* Position the second box so that they "almost" intersect */
-        float a = (float) Math.sqrt(1 + 1) + (float) Math.sqrt(1 + 1);
+        float a = Math.sqrt(1 + 1) + Math.sqrt(1 + 1);
         Vector3f c1 = new Vector3f(a + EPSILON, 0, 0);
         Matrix3f m = new Matrix3f().rotateXYZ(0, (float) Math.toRadians(45.0), 0);
         Vector3f ux0 = m.getColumn(0, new Vector3f());
@@ -266,12 +281,13 @@ public class IntersectionfTest extends TestCase {
         boolean intersects = Intersectionf.testObOb(c0, ux0, uy0, uz0, hs, c1, ux1, uy1, uz1, hs);
         assertFalse(intersects); // <- they do not intersect
         /* Position the second box so that they do intersect */
-        c1 = new Vector3f((float) Math.sqrt(2) * 2 - EPSILON, 0, 0);
+        c1 = new Vector3f(Math.sqrt(2) * 2 - EPSILON, 0, 0);
         intersects = Intersectionf.testObOb(c0, ux0, uy0, uz0, hs, c1, ux1, uy1, uz1, hs);
         assertTrue(intersects); // <- they do intersect
     }
 
-    public static void testObOb45Slide() {
+    @Test
+    public void testObOb45Slide() {
         Vector3f c0 = new Vector3f();
         float EPSILON = 1E-4f;
         /*
@@ -315,14 +331,15 @@ public class IntersectionfTest extends TestCase {
         assertTrue(intersects); // <- they do intersect
     }
 
-    public static void testObOb() {
-        float a = (float) (Math.sqrt(2.0*2.0 + 2.0*2.0) + Math.sqrt(0.5*0.5 + 0.5*0.5));
+    @Test
+    public void testObOb() {
+        float a = (float) (Math.sqrt(2.0 * 2.0 + 2.0 * 2.0) + Math.sqrt(0.5 * 0.5 + 0.5 * 0.5));
         float EPSILON = 1E-4f;
         Vector3f c0 = new Vector3f(0, 0, a - EPSILON);
         Vector3f hs0 = new Vector3f(0.5f, 0.5f, 0.5f);
         Vector3f c1 = new Vector3f(0, 0, 0);
         Vector3f hs1 = new Vector3f(2, 0.5f, 2);
-        Matrix3f m = new Matrix3f().rotateY((float) Math.toRadians(45));
+        Matrix3f m = new Matrix3f().rotateY(Math.toRadians(45));
         Vector3f ux0 = m.getColumn(0, new Vector3f());
         Vector3f uy0 = m.getColumn(1, new Vector3f());
         Vector3f uz0 = m.getColumn(2, new Vector3f());
@@ -336,7 +353,8 @@ public class IntersectionfTest extends TestCase {
         assertFalse(intersects); // <- they do not intersect
     }
 
-    public static void testFindClosestPointOnRectangle() {
+    @Test
+    public void testFindClosestPointOnRectangle() {
         final float EPSILON = 1E-4f;
         Vector3f a = new Vector3f(0, 0, 0);
         Vector3f b = new Vector3f(0, 1f, 0);

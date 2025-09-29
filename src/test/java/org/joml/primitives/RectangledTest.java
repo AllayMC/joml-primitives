@@ -23,54 +23,57 @@
  */
 package org.joml.primitives;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.joml.Vector2d;
+import org.junit.jupiter.api.Test;
 
-public class RectangledTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
 
+public class RectangledTest {
+
+    @Test
     public void testRectangleContainsPoints() {
         Rectangled rect = new Rectangled(0, 0, 3, 3);
 
-        Assert.assertTrue(rect.isValid());
-        Assert.assertFalse(rect.containsPoint(new Vector2d(0, 0)));
-        Assert.assertTrue(rect.containsPoint(new Vector2d(1, 1)));
-        Assert.assertFalse(rect.containsPoint(new Vector2d(-1, -1)));
-        Assert.assertFalse(rect.containsPoint(new Vector2d(4, 4)));
+        assertTrue(rect.isValid());
+        assertFalse(rect.containsPoint(new Vector2d(0, 0)));
+        assertTrue(rect.containsPoint(new Vector2d(1, 1)));
+        assertFalse(rect.containsPoint(new Vector2d(-1, -1)));
+        assertFalse(rect.containsPoint(new Vector2d(4, 4)));
     }
 
+    @Test
     public void testRectangleIntersection() {
         Rectangled first = new Rectangled(0, 0, 3, 3);
         Rectangled second = new Rectangled(-1, -1, 2, 2);
 
         // is valid
-        Assert.assertTrue(first.isValid());
-        Assert.assertTrue(second.isValid());
+        assertTrue(first.isValid());
+        assertTrue(second.isValid());
 
-        Assert.assertFalse(first.containsRectangle(second));
-        Assert.assertFalse(second.containsRectangle(first));
+        assertFalse(first.containsRectangle(second));
+        assertFalse(second.containsRectangle(first));
 
-        Assert.assertTrue(first.intersectsRectangle(second));
-        Assert.assertTrue(second.intersectsRectangle(first));
-        Assert.assertEquals(first.intersection(second, new Rectangled()), new Rectangled(0, 0, 2, 2));
-
+        assertTrue(first.intersectsRectangle(second));
+        assertTrue(second.intersectsRectangle(first));
+        assertEquals(new Rectangled(0, 0, 2, 2), first.intersection(second, new Rectangled()));
     }
 
+    @Test
     public void testRectangleContains() {
         Rectangled first = new Rectangled(-1, -1, 2, 2);
         Rectangled second = new Rectangled(0, 0, 1, 1);
-        Assert.assertTrue(first.containsRectangle(second));
-        Assert.assertFalse(second.containsRectangle(first));
+        assertTrue(first.containsRectangle(second));
+        assertFalse(second.containsRectangle(first));
 
-        Assert.assertTrue(first.intersectsRectangle(second));
-        Assert.assertTrue(second.intersectsRectangle(first));
+        assertTrue(first.intersectsRectangle(second));
+        assertTrue(second.intersectsRectangle(first));
 
-        Assert.assertEquals(first.intersection(second, new Rectangled()), new Rectangled(0, 0, 1, 1));
+        assertEquals(new Rectangled(0, 0, 1, 1), first.intersection(second, new Rectangled()));
     }
 
+    @Test
     public void testZeroSizeRectangle() {
         Rectangled rect = new Rectangled(0, 0, 0, 0);
-        Assert.assertFalse(rect.isValid());
+        assertFalse(rect.isValid());
     }
 }
