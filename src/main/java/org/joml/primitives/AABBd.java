@@ -39,6 +39,7 @@ import org.joml.Vector3d;
 import org.joml.Vector3dc;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
+import org.joml.Vector3ic;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as double-precision floats.
@@ -590,6 +591,14 @@ public class AABBd implements Externalizable, AABBdc {
         return containsPoint(point.x(), point.y(), point.z());
     }
 
+    public boolean containsPoint(Vector3fc point) {
+        return containsPoint(point.x(), point.y(), point.z());
+    }
+
+    public boolean containsPoint(Vector3ic point) {
+        return containsPoint(point.x(), point.y(), point.z());
+    }
+
     public boolean intersectsPlane(double a, double b, double c, double d) {
         return Intersectiond.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
@@ -599,6 +608,16 @@ public class AABBd implements Externalizable, AABBdc {
     }
 
     public boolean intersectsAABB(AABBdc other) {
+        return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
+               this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
+    }
+
+    public boolean intersectsAABB(AABBfc other) {
+        return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
+               this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
+    }
+
+    public boolean intersectsAABB(AABBic other) {
         return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
                this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
     }

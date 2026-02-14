@@ -29,6 +29,7 @@ import org.joml.Vector3d;
 import org.joml.Vector3dc;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
+import org.joml.Vector3ic;
 
 /**
  * Interface to a read-only view of axis-aligned box defined via the minimum
@@ -328,6 +329,24 @@ public interface AABBdc {
     boolean containsPoint(Vector3dc point);
 
     /**
+     * Test whether the given point lies inside this AABB.
+     *
+     * @param point
+     *          the coordinates of the point
+     * @return <code>true</code> iff the given point lies inside this AABB; <code>false</code> otherwise
+     */
+    boolean containsPoint(Vector3fc point);
+
+    /**
+     * Test whether the given point lies inside this AABB.
+     *
+     * @param point
+     *          the coordinates of the point
+     * @return <code>true</code> iff the given point lies inside this AABB; <code>false</code> otherwise
+     */
+    boolean containsPoint(Vector3ic point);
+
+    /**
      * Test whether the plane given via its plane equation <code>a*x + b*y + c*z + d = 0</code> intersects this AABB.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
@@ -365,6 +384,24 @@ public interface AABBdc {
      * @return <code>true</code> iff both AABBs intersect; <code>false</code> otherwise
      */
     boolean intersectsAABB(AABBdc other);
+
+    /**
+     * Test whether <code>this</code> and <code>other</code> intersect.
+     *
+     * @param other
+     *          the other AABB
+     * @return <code>true</code> iff both AABBs intersect; <code>false</code> otherwise
+     */
+    boolean intersectsAABB(AABBfc other);
+
+    /**
+     * Test whether <code>this</code> and <code>other</code> intersect.
+     *
+     * @param other
+     *          the other AABB
+     * @return <code>true</code> iff both AABBs intersect; <code>false</code> otherwise
+     */
+    boolean intersectsAABB(AABBic other);
 
     /**
      * Test whether this AABB intersects the given sphere with equation
