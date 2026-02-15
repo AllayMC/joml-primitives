@@ -75,17 +75,17 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Create a new {@link AABBf} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
-     *          the {@link AABBf} to copy from
+     *          the {@link AABBfc} to copy from
      */
-    public AABBf(AABBf source) {
-        this.minX = source.minX;
-        this.minY = source.minY;
-        this.minZ = source.minZ;
-        this.maxX = source.maxX;
-        this.maxY = source.maxY;
-        this.maxZ = source.maxZ;
+    public AABBf(AABBfc source) {
+        this.minX = source.minX();
+        this.minY = source.minY();
+        this.minZ = source.minZ();
+        this.maxX = source.maxX();
+        this.maxY = source.maxY();
+        this.maxZ = source.maxZ();
     }
 
     /**
@@ -552,6 +552,15 @@ public class AABBf implements Externalizable, AABBfc {
         return containsPoint(point.x(), point.y(), point.z());
     }
 
+    public boolean containsPoint(Vector3dc point) {
+        return point.x() > minX && point.y() > minY && point.z() > minZ &&
+               point.x() < maxX && point.y() < maxY && point.z() < maxZ;
+    }
+
+    public boolean containsPoint(Vector3ic point) {
+        return containsPoint(point.x(), point.y(), point.z());
+    }
+
     public boolean intersectsPlane(float a, float b, float c, float d) {
         return Intersectionf.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
@@ -565,12 +574,27 @@ public class AABBf implements Externalizable, AABBfc {
                this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
     }
 
+    public boolean intersectsAABB(AABBdc other) {
+        return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
+               this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
+    }
+
+    public boolean intersectsAABB(AABBic other) {
+        return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
+               this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
+    }
+
     public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
         return Intersectionf.testAabSphere(minX, minY, minZ, maxX, maxY, maxZ, centerX, centerY, centerZ, radiusSquared);
     }
 
     public boolean intersectsSphere(Spheref sphere) {
         return Intersectionf.testAabSphere(this, sphere);
+    }
+
+    public boolean intersectsSphere(Spherefc sphere) {
+        float radius = sphere.r();
+        return intersectsSphere(sphere.x(), sphere.y(), sphere.z(), radius * radius);
     }
 
     public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {

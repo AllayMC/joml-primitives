@@ -580,6 +580,11 @@ public class AABBi implements Externalizable, AABBic {
         return containsPoint(point.x(), point.y(), point.z());
     }
 
+    public boolean containsPoint(Vector3dc point) {
+        return point.x() > minX && point.y() > minY && point.z() > minZ &&
+               point.x() < maxX && point.y() < maxY && point.z() < maxZ;
+    }
+
     public boolean intersectsPlane(float a, float b, float c, float d) {
         return Intersectionf.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
@@ -594,6 +599,11 @@ public class AABBi implements Externalizable, AABBic {
     }
 
     public boolean intersectsAABB(AABBfc other) {
+        return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
+            this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
+    }
+
+    public boolean intersectsAABB(AABBdc other) {
         return this.maxX >= other.minX() && this.maxY >= other.minY() && this.maxZ >= other.minZ() &&
             this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
     }
