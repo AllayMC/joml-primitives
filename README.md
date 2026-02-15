@@ -33,5 +33,5 @@ repositories {
     mavenCentral()
 }
 
-implementation("org.allaymc:joml-primitives:3.0.10")
+implementation("org.allaymc:joml-primitives:1.11.1")
 ```

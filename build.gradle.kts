@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.allaymc"
-version = "1.11.0"
+version = "1.11.1"
 
 tasks {
     withType<JavaCompile> {
